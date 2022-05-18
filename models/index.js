@@ -6,7 +6,7 @@ const Habitacion = require('./habitacion')
 const Tipo = require('./tipo')
 const Usuario = require('./usuario')
 
-const Modelos = {
+module.exports = { 
     Alquiler,
     Contratista,
     Estudiante,
@@ -15,4 +15,3 @@ const Modelos = {
     Tipo,
     Usuario
 }
-module.exports = { Modelos }
