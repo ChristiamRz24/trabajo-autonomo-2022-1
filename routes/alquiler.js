@@ -1,7 +1,6 @@
 const { Router } = require('express');
 // check -> funciona como un middleware, pero no muestra nada.
 const { check } = require('express-validator');
-//const { validarCampos } = require('../middlewares/validarCampos');
 
 const{
     obtenerAlquileres,
@@ -11,15 +10,14 @@ const{
     actualizarAlquiler
 } = require('../controllers').Alquiler;
 
-const { validarCampos } = require('../middlewares');
+const { validarCampos } = require('../middlewares/index');
 
 const router =Router();
 
-
-router.get('/', obtenerAlquileres);
-router.get('/:id', check('id', 'El id no es válido').isMongoId(), obtenerAlquiler);
-router.post('/',  check('nombre', 'El nombre es requerido').not().isEmpty(), crearAlquiler);
-router.put('/:id', check('id', 'El id no es válido').isMongoId(), actualizarAlquiler);
-router.delete('/:id', check('id', 'El id no es válido').isMongoId(), eliminarAlquiler);
+router.get('/alquiler', obtenerAlquileres);
+router.get('/alquiler/{id}', check('id', 'El id no es válido').isMongoId(), obtenerAlquiler);
+router.post('/alquiler', crearAlquiler);
+router.put('/alquiler/{id}', check('id', 'El id no es válido').isMongoId(), actualizarAlquiler);
+router.delete('/alquiler/{id}', check('id', 'El id no es válido').isMongoId(), eliminarAlquiler);
 
 module.exports = router;
