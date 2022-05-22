@@ -8,7 +8,7 @@ const obtenerContratistas = async ( req, res = response )=>{
     const query = { estado:true };
     const [ total, contratistas ] = await Promise.all(
         [
-            Contratista.countDocuments(),
+            Contratista.countDocuments(query),
             Contratista.find(query)
             .skip(desde)
             .limit(limite)

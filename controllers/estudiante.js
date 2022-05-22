@@ -8,7 +8,7 @@ const obtenerEstudiantes = async ( req, res = response )=>{
     const query = { estado:true };
     const [ total, estudiantes ] = await Promise.all(
         [
-            Estudiante.countDocuments(),
+            Estudiante.countDocuments(query),
             Estudiante.find(query)
             .skip(desde)
             .limit(limite)
@@ -27,7 +27,7 @@ const obtenerEstudiante = async ( req, res = response )=>{
     const estudiante = await Estudiante.findById(id);
     res.json(estudiante);
 }
-// Constante llamada crear Estudiante donde su funcion es crear Estudiantees
+// Constante llamada crear Estudiante donde su funcion es crear Estudiantes
 const crearEstudiante = async ( req, res = response )=>{
     const { estado, ...body } = req.body;
     

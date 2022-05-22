@@ -8,7 +8,7 @@ const obtenerAlquileres = async ( req, res = response )=>{
     const query = { estado:true };
     const [ total, alquileres ] = await Promise.all(
         [
-            Alquiler.countDocuments(),
+            Alquiler.countDocuments(query),
             Alquiler.find(query)
             .skip(desde)
             .limit(limite)
@@ -43,11 +43,11 @@ const actualizarAlquiler = async ( req, res = response )=>{
 }
 // Constante llamada eliminar Alquiler donde su funcion es eliminar Alquiler
 const eliminarAlquiler = async (req, res)=>{
-    const { id } =req.params;
+    const { id } = req.params;
     const alquilerEliminado = await Alquiler.findByIdAndUpdate(id, {estado:false}, {new:true})
     res.json(alquilerEliminado)
 }
-// Modulos a Exportar 
+// Modulos a Exportar
 module.exports = { 
     obtenerAlquileres,
     obtenerAlquiler,
