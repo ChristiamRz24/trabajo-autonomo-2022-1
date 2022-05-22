@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose')
 
+// Esquema de Mongoose para la habitación
 const habitacionSchema = Schema(
     { 
         idContratista: { 
@@ -8,8 +9,9 @@ const habitacionSchema = Schema(
         },
         descripcion: String,
         direccion: String,
-        precio: Number,
+        precioPorDia: Number,
         nCamas: String
     })
 
+// Exportar el modelo
 module.exports = model('Habitacion', habitacionSchema);

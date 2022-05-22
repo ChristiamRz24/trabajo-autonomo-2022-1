@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose')
 
+// Esquema de Mongoose para el estudiante
 const estudianteSchema = Schema( 
 { 
     idUsuario: { 
@@ -15,4 +16,5 @@ const estudianteSchema = Schema(
     telefono: String
 })
 
+// Expprtamos el modelo
 module.exports = model('Estudiante', estudianteSchema);

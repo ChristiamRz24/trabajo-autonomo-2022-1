@@ -1,14 +1,13 @@
 const { Schema, model } = require('mongoose')
 
+// Esquema de Mongoose para el usuario
 const usuarioSchema = Schema(
-    { 
-        idTipo: { 
-            type: Schema.Types.ObjectId,
-            ref: "Tipo"
-        },
-        nombre: String,
-        contraseña: String
+    {
+        usuario: String,
+        contrasena: String,
+        tipo: String
     }
 )
 
+// Exportar el modelo
 module.exports = model('Usuario', usuarioSchema);

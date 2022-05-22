@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose')
 
+// Esquema de Mongoose para la factura
 const facturaSchema = Schema( 
     { 
         idContratista: { 
@@ -16,4 +17,5 @@ const facturaSchema = Schema(
     }
 )
 
+// Exportar el modelo
 module.exports = model('Factura', facturaSchema);
