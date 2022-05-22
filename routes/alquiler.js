@@ -2,6 +2,7 @@ const { Router } = require('express');
 // check -> funciona como un middleware, pero no muestra nada.
 const { check } = require('express-validator');
 
+// Importar las funciones del controlador alquiler
 const{
     obtenerAlquileres,
     obtenerAlquiler,
@@ -14,10 +15,12 @@ const { validarCampos } = require('../middlewares/index');
 
 const router =Router();
 
-router.get('/alquiler', obtenerAlquileres);
-router.get('/alquiler/{id}', check('id', 'El id no es válido').isMongoId(), obtenerAlquiler);
-router.post('/alquiler', crearAlquiler);
-router.put('/alquiler/{id}', check('id', 'El id no es válido').isMongoId(), actualizarAlquiler);
-router.delete('/alquiler/{id}', check('id', 'El id no es válido').isMongoId(), eliminarAlquiler);
+// Crear las rutas del RestAPI para el alquiler
+router.get('/', obtenerAlquileres); 
+router.get('/:id', check('id', 'El id no es válido').isMongoId(), obtenerAlquiler);
+router.post('/', crearAlquiler);
+router.put('/:id', check('id', 'El id no es válido').isMongoId(), actualizarAlquiler);
+router.delete('/:id', check('id', 'El id no es válido').isMongoId(), eliminarAlquiler);
 
+// Exportar las rutas
 module.exports = router;
