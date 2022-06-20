@@ -2,6 +2,7 @@ import express, { Router, Express } from "express";
 import cors from 'cors';
 
 import { router as alquileres } from './routes/alquiler'
+import { router as contratistas } from './routes/contratista'
 import { router as usuarios } from './routes/usuario'
 
 import { dbConnection } from "./database/config";
@@ -21,6 +22,7 @@ class Server {
         this.port= Number(process.env["PORT"]);
         this.paths = {
             alquiler: '/api/alquiler',
+            contratista: '/api/contratista',
             usuario: '/api/usuario'
         }
         this.conectarDB();
@@ -38,6 +40,7 @@ class Server {
     }
     private routes(){
         this.app.use(this.paths.alquiler, alquileres);
+        this.app.use(this.paths.contratista, contratistas);
         this.app.use(this.paths.usuario, usuarios);
     }
     listen(){

@@ -39,6 +39,7 @@ exports.Server = void 0;
 const express_1 = __importStar(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const alquiler_1 = require("./routes/alquiler");
+const contratista_1 = require("./routes/contratista");
 const usuario_1 = require("./routes/usuario");
 const config_1 = require("./database/config");
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -50,6 +51,7 @@ class Server {
         this.port = Number(process.env["PORT"]);
         this.paths = {
             alquiler: '/api/alquiler',
+            contratista: '/api/contratista',
             usuario: '/api/usuario'
         };
         this.conectarDB();
@@ -69,6 +71,7 @@ class Server {
     }
     routes() {
         this.app.use(this.paths.alquiler, alquiler_1.router);
+        this.app.use(this.paths.contratista, contratista_1.router);
         this.app.use(this.paths.usuario, usuario_1.router);
     }
     listen() {
