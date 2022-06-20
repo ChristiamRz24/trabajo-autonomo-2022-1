@@ -4,6 +4,7 @@ import cors from 'cors';
 import { router as alquileres } from './routes/alquiler'
 import { router as contratistas } from './routes/contratista'
 import { router as estudiantes } from './routes/estudiante'
+import { router as habitaciones } from './routes/habitacion'
 import { router as usuarios } from './routes/usuario'
 
 import { dbConnection } from "./database/config";
@@ -25,6 +26,7 @@ class Server {
             alquiler: '/api/alquiler',
             contratista: '/api/contratista',
             estudiante: '/api/estudiante',
+            habitacion: '/api/habitacion',
             usuario: '/api/usuario'
         }
         this.conectarDB();
@@ -44,6 +46,7 @@ class Server {
         this.app.use(this.paths.alquiler, alquileres);
         this.app.use(this.paths.contratista, contratistas);
         this.app.use(this.paths.estudiante, estudiantes);
+        this.app.use(this.paths.habitacion, habitaciones);
         this.app.use(this.paths.usuario, usuarios);
     }
     listen(){

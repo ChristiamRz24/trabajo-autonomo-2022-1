@@ -41,6 +41,7 @@ const cors_1 = __importDefault(require("cors"));
 const alquiler_1 = require("./routes/alquiler");
 const contratista_1 = require("./routes/contratista");
 const estudiante_1 = require("./routes/estudiante");
+const habitacion_1 = require("./routes/habitacion");
 const usuario_1 = require("./routes/usuario");
 const config_1 = require("./database/config");
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -54,6 +55,7 @@ class Server {
             alquiler: '/api/alquiler',
             contratista: '/api/contratista',
             estudiante: '/api/estudiante',
+            habitacion: '/api/habitacion',
             usuario: '/api/usuario'
         };
         this.conectarDB();
@@ -75,6 +77,7 @@ class Server {
         this.app.use(this.paths.alquiler, alquiler_1.router);
         this.app.use(this.paths.contratista, contratista_1.router);
         this.app.use(this.paths.estudiante, estudiante_1.router);
+        this.app.use(this.paths.habitacion, habitacion_1.router);
         this.app.use(this.paths.usuario, usuario_1.router);
     }
     listen() {
