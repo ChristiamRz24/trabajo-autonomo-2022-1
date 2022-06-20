@@ -23,12 +23,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Usuario = exports.Contratista = exports.Alquiler = void 0;
+exports.Usuario = exports.Estudiante = exports.Contratista = exports.Alquiler = void 0;
 // Importar todos los controladores
 const Alquiler = __importStar(require("./alquiler"));
 exports.Alquiler = Alquiler;
 const Contratista = __importStar(require("./contratista"));
 exports.Contratista = Contratista;
+const Estudiante = __importStar(require("./estudiante"));
+exports.Estudiante = Estudiante;
 const Usuario = __importStar(require("./usuario"));
 exports.Usuario = Usuario;
 //# sourceMappingURL=index.js.map
