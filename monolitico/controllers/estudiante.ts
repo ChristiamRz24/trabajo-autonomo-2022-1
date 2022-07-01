@@ -12,7 +12,6 @@ const obtenerEstudiantes = async (req: Request, res: Response) => {
                 countDocuments(query),
             Estudiante
                 .find(query)
-                .populate('usuario', { _id: 0, contrasena: 0 })
                 .populate('alquiler', { estudiante: 0 })
                 .skip(Number(desde))
                 .limit(Number(limite))
@@ -33,7 +32,6 @@ const obtenerEstudiante = async (req: Request, res: Response) => {
     const estudiante:IEstudiante|null =
     await Estudiante
             .findById(id)
-            .populate('usuario', { _id: 0, contrasena: 0 })
             .populate('alquiler', { estudiante: 0 })
     // - - - - - - - - - - - - - - - -
     res.json(estudiante);

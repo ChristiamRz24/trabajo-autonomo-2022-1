@@ -18,7 +18,6 @@ const obtenerContratistas = async (req: Request, res: Response) => {
                  * contrasena: 0
                  * contratista: 0
                 */
-                .populate('usuario', { _id: 0, contrasena: 0 })
                 .populate('habitaciones')
                 .populate('alquileres', { contratista: 0 })
                 .skip(Number(desde))
@@ -40,7 +39,6 @@ const obtenerContratista = async (req: Request, res: Response) => {
     const contratista:IContratista|null =
     await Contratista
             .findById(id)
-            .populate('usuario', { _id: 0, contrasena: 0 })
             .populate('habitaciones')
             .populate('alquileres', { contratista: 0 })
     // - - - - - - - - - - - - - - - -

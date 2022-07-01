@@ -31,7 +31,6 @@ const obtenerEstudiantes = (req, res) => __awaiter(void 0, void 0, void 0, funct
             countDocuments(query),
         index_1.Estudiante
             .find(query)
-            .populate('usuario', { _id: 0, contrasena: 0 })
             .populate('alquiler', { estudiante: 0 })
             .skip(Number(desde))
             .limit(Number(limite))
@@ -48,7 +47,6 @@ const obtenerEstudiante = (req, res) => __awaiter(void 0, void 0, void 0, functi
     // - - - - - - - - - - - - - - - -
     const estudiante = yield index_1.Estudiante
         .findById(id)
-        .populate('usuario', { _id: 0, contrasena: 0 })
         .populate('alquiler', { estudiante: 0 });
     // - - - - - - - - - - - - - - - -
     res.json(estudiante);

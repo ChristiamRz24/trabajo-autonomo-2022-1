@@ -8,10 +8,6 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const { Schema, Model } = mongoose_1.default;
 // Esquema de Mongoose para el estudiante
 const estudianteSchema = new Schema({
-    usuario: {
-        type: Schema.Types.ObjectId,
-        ref: "usuarios"
-    },
     alquiler: {
         type: Schema.Types.ObjectId,
         ref: "alquileres"

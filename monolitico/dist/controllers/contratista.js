@@ -37,7 +37,6 @@ const obtenerContratistas = (req, res) => __awaiter(void 0, void 0, void 0, func
              * contrasena: 0
              * contratista: 0
             */
-            .populate('usuario', { _id: 0, contrasena: 0 })
             .populate('habitaciones')
             .populate('alquileres', { contratista: 0 })
             .skip(Number(desde))
@@ -55,7 +54,6 @@ const obtenerContratista = (req, res) => __awaiter(void 0, void 0, void 0, funct
     // - - - - - - - - - - - - - - - -
     const contratista = yield contratista_1.Contratista
         .findById(id)
-        .populate('usuario', { _id: 0, contrasena: 0 })
         .populate('habitaciones')
         .populate('alquileres', { contratista: 0 });
     // - - - - - - - - - - - - - - - -

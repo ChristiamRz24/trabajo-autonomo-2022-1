@@ -6,10 +6,6 @@ const { Schema, Model } = mongoose;
 // Esquema de Mongoose para el contratista
 const contratistaSchema: mongoose.Schema = new Schema<IContratista>(
     {
-        usuario: {
-            type: Schema.Types.ObjectId,
-            ref: "usuarios"
-        },
         habitaciones: [
             {
                 type: Schema.Types.ObjectId,
