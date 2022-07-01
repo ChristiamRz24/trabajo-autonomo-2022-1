@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  monolitico:
+    build: ./monolitico
+    depends_on:
+      - db_monolitico
+    environment:
+      - PORT=3000
+      - MONGODB_CNN=mongodb://db_monolitico:27017/test
+  db_monolitico:
+    image: mongo:4.4.6
+
+  otras:
+    build: ./microservicios/otras
+    depends_on:
+      - db_otras
+    environment:
+      - PORT=3000
+      - MONGODB_CNN=mongodb://db_otras:27017/test
+  db_otras:
+    image: mongo:4.4.6
+
+  usuarios:
+    build: ./microservicios/usuarios
+    depends_on:
+      - db_usuarios
+    environment:
+      - PORT=3000
+      - MONGODB_CNN=mongodb://db_usuarios:27017/test
+  db_usuarios:
+    image: mongo:4.4.6
+
+  nginx:
+    image: nginx:latest
+    ports: ["8080:8080"]
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - otras
+      - usuarios
