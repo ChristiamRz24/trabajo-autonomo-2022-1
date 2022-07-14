@@ -15,7 +15,9 @@ import {
   Dropdown
 } from 'react-bootstrap'
 
-export const Header = () => {
+export const Header = (props) => {
+  let pathActual = new URL(window.location.href).pathname;
+
   const [user, setUser] = useState('')
 
   // Obtener la información del usuario
@@ -47,13 +49,27 @@ export const Header = () => {
           </Col>
           <Col sm='12' lg='8' className='d-flex align-items-center my-2'>
             <Form role="search" className="w-100">
-              <input
-                type="search"
-                className="form-control"
-                placeholder="Buscar habitaciones..."
-                aria-label="Search"
-              >
-              </input>
+              {
+                pathActual == '/'
+                  ? <input
+                      type="search"
+                      id="search-bedroom"
+                      className="form-control"
+                      placeholder="Buscar habitaciones..."
+                      aria-label="Search"
+                      onChange={(e) => {
+                        const palabraABuscar = e.target.value;
+                        props.searchBedroom(palabraABuscar)
+                      }}
+                    ></input>
+                  : <input
+                    id="search-bedroom"
+                    className="form-control"
+                    placeholder="Buscar habitaciones..."
+                    disabled
+                    >
+                    </input>
+              }
             </Form>
           </Col>
           <Col sm='12' lg='2'

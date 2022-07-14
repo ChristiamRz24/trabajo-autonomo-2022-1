@@ -18,6 +18,9 @@ import BedRoom from './BedRoom.jsx'
 export const Home = () => {
 	const [habitaciones, setHabitaciones] = useState([])
 	const [idHabitacionx, setIdHabitacionx] = useState("")
+  
+  // Para la búsqueda
+	const [habitacionesHelp, setHabitacionesHelp] = useState([])
 	
 	// Obtener la información de las habitaciones
 	useEffect(() => {
@@ -27,6 +30,7 @@ export const Home = () => {
         const response = await axios(url);
         const listaHabitaciones = response.data.habitaciones
         setHabitaciones(listaHabitaciones);
+        setHabitacionesHelp(listaHabitaciones);
       } catch (error) {
         console.log(error);
       }
@@ -35,9 +39,39 @@ export const Home = () => {
     fetchData();
   }, [setHabitaciones]);
 
+  // Filtrar las habitaciones
+  const filtrarHabitaciones = (palabras) => {
+      // Si no hay palabras en la barra de búsqueda
+      if(palabras == '') {
+        // Restablecer las habitaciones en el array
+        setHabitaciones(habitacionesHelp)
+      } else {
+        // Si hay palabras en la barra de busqueda
+        // Y el array de las habitaciones no esta vacío
+        if (habitaciones.length != 0) {
+          // Buscar las habitaciones
+          const filtradas = habitaciones.filter(habitacionx => 
+            habitacionx.descripcion.includes(palabras) && habitacionx.alquilada == false
+          )
+          // Actualizar el array de las habitaciones
+          setHabitaciones(filtradas)
+        } else {
+          // Si el array de las habitaciones está vacío
+          // Obtener las habitaciones del array de ayuda
+          let tempHabitaciones = habitacionesHelp;
+          // Buscar las habitaciones
+          const filtradas = tempHabitaciones.filter(habitacionx => 
+            habitacionx.descripcion.includes(palabras) && habitacionx.alquilada == false
+          )
+          // Actualizar el array de las habitaciones
+          setHabitaciones(filtradas)
+        }
+      }
+  }
+
   return (
     <>
-			<Header />
+			<Header searchBedroom = {(palabras) => {filtrarHabitaciones(palabras)}}/>
 			<main className="container pb-3">
 				<Row>
 					<section className="col-lg-2">
@@ -52,7 +86,7 @@ export const Home = () => {
 							</Form.Group>
 						</Form>
 					</section>
-					<section className="col-lg-10">
+					<section className="col-lg-10 border-start">
 						<h4>Habitaciones</h4>
 						<Row>
               {
@@ -67,11 +101,21 @@ export const Home = () => {
                           direction = {habitacionx.direccion}
                           price = {habitacionx.precio}
                           nBeds = {habitacionx.nCamas}
-                          hideBedRoom= {(idHabitacion) => {
-                            const newHabitaciones = habitaciones.filter(habitacionx => 
-                              habitacionx._id !== idHabitacion
-                            )
-                            setHabitaciones(newHabitaciones)
+                          hideBedRoom = {(idHabitacion) => {
+                              const search = document.getElementById("search-bedroom").value;
+                              if(search == '') {
+                                const newHabitaciones = habitaciones.filter(habitacionx => 
+                                  habitacionx._id !== idHabitacion
+                                )
+                                setHabitaciones(newHabitaciones)
+                                setHabitacionesHelp(newHabitaciones)
+                              } else {
+                                const newHabitaciones = habitacionesHelp.filter(habitacionx => 
+                                  habitacionx._id !== idHabitacion
+                                )
+                                setHabitaciones(newHabitaciones)
+                                setHabitacionesHelp(newHabitaciones)
+                              }
                             }
                           }
                           smx = "12"
