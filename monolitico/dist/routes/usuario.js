@@ -6,12 +6,13 @@ const express_1 = require("express");
 const index_1 = require("../validators/index");
 // Importar las funciones del controlador usuario
 const controllers_1 = require("../controllers");
-const { obtenerUsuarios, obtenerUsuario, crearUsuario, actualizarUsuario, eliminarUsuario } = controllers_1.Usuario;
+const { obtenerUsuarios, obtenerUsuario, crearUsuario, actualizarUsuario, eliminarUsuario, login } = controllers_1.Usuario;
 const router = (0, express_1.Router)();
 exports.router = router;
 // Rutas para el usuario
 router.get('/', obtenerUsuarios);
 router.get('/:id', obtenerUsuario);
+router.get('/:user/:pass', login);
 router.post('/', index_1.validarUsuario, crearUsuario);
 router.put('/:id', actualizarUsuario);
 router.delete('/:id', eliminarUsuario);

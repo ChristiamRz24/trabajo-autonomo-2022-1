@@ -6,9 +6,13 @@ const { Schema, Model } = mongoose;
 // Esquema de Mongoose para el estudiante
 const estudianteSchema: mongoose.Schema = new Schema<IEstudiante>(
 	{
-		alquiler: {
+		usuario: {
 			type: Schema.Types.ObjectId,
-			ref: "alquileres"
+			required: true
+		},
+		alquiler: {
+			type: String,
+			default: ""
 		},
 		nombre: {
 			type: String,

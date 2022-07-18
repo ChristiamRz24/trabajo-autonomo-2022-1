@@ -10,7 +10,8 @@ const{
     obtenerUsuario,
     crearUsuario,
     actualizarUsuario,
-    eliminarUsuario
+    eliminarUsuario,
+    login
 } = Usuario;
 
 const router = Router();
@@ -18,6 +19,7 @@ const router = Router();
 // Rutas para el usuario
 router.get('/', obtenerUsuarios);
 router.get('/:id', obtenerUsuario);
+router.get('/:user/:pass', login);
 router.post('/', validarUsuario, crearUsuario);
 router.put('/:id', actualizarUsuario);
 router.delete('/:id', eliminarUsuario);

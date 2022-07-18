@@ -20,7 +20,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eliminarUsuario = exports.actualizarUsuario = exports.crearUsuario = exports.obtenerUsuario = exports.obtenerUsuarios = void 0;
+exports.login = exports.eliminarUsuario = exports.actualizarUsuario = exports.crearUsuario = exports.obtenerUsuario = exports.obtenerUsuarios = void 0;
 const index_1 = require("../models/index");
 // Consultar los usuarios registrados
 const obtenerUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -77,4 +77,22 @@ const eliminarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function
     res.json(usuarioEliminado);
 });
 exports.eliminarUsuario = eliminarUsuario;
+// Inicio de sesión al sistema
+const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { user, pass } = req.params;
+    const query = {
+        usuario: user,
+        contrasena: pass,
+        estado: true
+    };
+    const usuarioEncontrado = yield index_1.Usuario.findOne(query);
+    if (usuarioEncontrado == null) {
+        return res.json({
+            errorStatus: 1,
+            message: 'Usuario no encontrado'
+        });
+    }
+    return res.json(usuarioEncontrado);
+});
+exports.login = login;
 //# sourceMappingURL=usuario.js.map

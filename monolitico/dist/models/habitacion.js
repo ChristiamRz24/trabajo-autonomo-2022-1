@@ -33,6 +33,10 @@ const habitacionSchema = new Schema({
         type: Number,
         require: true
     },
+    alquilada: {
+        type: Boolean,
+        default: false
+    },
     estado: {
         type: Boolean,
         default: true

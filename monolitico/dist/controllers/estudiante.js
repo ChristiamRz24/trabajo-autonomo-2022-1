@@ -22,6 +22,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarEstudiante = exports.actualizarEstudiante = exports.crearEstudiante = exports.obtenerEstudiante = exports.obtenerEstudiantes = void 0;
 const index_1 = require("../models/index");
+const index_2 = require("../models/index");
 // Consultar los estudiantes registrados
 const obtenerEstudiantes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { limite = 10, desde = 0 } = req.query;
@@ -31,7 +32,6 @@ const obtenerEstudiantes = (req, res) => __awaiter(void 0, void 0, void 0, funct
             countDocuments(query),
         index_1.Estudiante
             .find(query)
-            .populate('alquiler', { estudiante: 0 })
             .skip(Number(desde))
             .limit(Number(limite))
     ]);
@@ -44,12 +44,24 @@ exports.obtenerEstudiantes = obtenerEstudiantes;
 // Consultar un estudiante por su id
 const obtenerEstudiante = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    // - - - - - - - - - - - - - - - -
-    const estudiante = yield index_1.Estudiante
-        .findById(id)
-        .populate('alquiler', { estudiante: 0 });
-    // - - - - - - - - - - - - - - - -
-    res.json(estudiante);
+    // - - - - - - - - - - - - - - - - - - - - - - -
+    const estudiante = yield index_1.Estudiante.findById(id);
+    if (!estudiante) {
+        return res.status(400).json({ message: 'Estudiante no encontrado' });
+    }
+    const idAlquiler = estudiante.alquiler;
+    if (idAlquiler != '') {
+        const habitacionAlquilada = yield index_2.Habitacion.findById(idAlquiler);
+        return res.status(200).json({
+            info: estudiante,
+            alquiler: habitacionAlquilada
+        });
+    }
+    // - - - - - - - - - - - - - - - - - - - - - - -
+    res.status(200).json({
+        info: estudiante,
+        alquiler: "Nada alquilado"
+    });
 });
 exports.obtenerEstudiante = obtenerEstudiante;
 //  Registrar un estudiante en la base de datos

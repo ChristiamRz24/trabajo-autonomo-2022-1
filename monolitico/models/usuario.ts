@@ -6,6 +6,10 @@ const { Schema, Model } = mongoose;
 // Esquema de Mongoose para el usuario
 const usuarioSchema: mongoose.Schema = new Schema<IUsuario>(
     {
+        idCuenta: {
+            type: String,
+            default: ""
+        },
         usuario: {
             type: String,
             require: true

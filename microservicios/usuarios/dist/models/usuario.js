@@ -8,6 +8,10 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const { Schema, Model } = mongoose_1.default;
 // Esquema de Mongoose para el usuario
 const usuarioSchema = new Schema({
+    idCuenta: {
+        type: String,
+        default: ""
+    },
     usuario: {
         type: String,
         require: true

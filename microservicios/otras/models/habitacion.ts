@@ -31,6 +31,10 @@ const habitacionSchema: mongoose.Schema = new Schema<IHabitacion>(
             type: Number,
             require: true
         },
+        alquilada: {
+            type: Boolean,
+            default: false
+        },
         estado: {
             type: Boolean,
             default: true

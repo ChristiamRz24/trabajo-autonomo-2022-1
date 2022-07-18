@@ -28,7 +28,11 @@ const contratistaSchema = new Schema({
         type: String,
         require: true
     },
-    direccion: {
+    sexo: {
+        type: String,
+        require: true
+    },
+    correo: {
         type: String,
         require: true
     },

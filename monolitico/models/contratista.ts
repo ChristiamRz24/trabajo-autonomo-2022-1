@@ -23,17 +23,21 @@ const contratistaSchema: mongoose.Schema = new Schema<IContratista>(
             require: true
         },
         dni: {
-            type: String,
-            require: true
-        },
-        direccion: {
-            type: String,
-            require: true
-        },
-        telefono: {
-            type: String,
-            require: true
-        },
+			type: String,
+			require: true
+		},
+		sexo: {
+			type: String,
+			require: true
+		},
+		correo: {
+			type: String,
+			require: true
+		},
+		telefono: {
+			type: String,
+			require: true
+		},
 		estado: {
 			type: Boolean,
 			default: true

@@ -7,5 +7,6 @@ export interface IHabitacion {
     direccion: String,
     precio: Number,
     nCamas: Number,
+    alquilada: Boolean,
     estado: Boolean,
 }

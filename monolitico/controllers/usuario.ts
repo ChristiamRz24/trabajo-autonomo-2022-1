@@ -1,6 +1,13 @@
 import { Request, Response } from "express";
+
 import { Usuario } from "../models/index";
 import { IUsuario } from "../interfaces"
+
+import { Estudiante } from "../models/index";
+import { IEstudiante } from "../interfaces"
+
+import { Contratista } from "../models/index";
+import { IContratista } from "../interfaces"
 
 // Consultar los usuarios registrados
 const obtenerUsuarios = async (req: Request, res: Response) => {
@@ -27,7 +34,9 @@ const obtenerUsuarios = async (req: Request, res: Response) => {
 // Consultar un usuario por su id
 const obtenerUsuario = async (req: Request, res: Response) => {
     const { id } = req.params;
+
     const usuario:IUsuario|null = await Usuario.findById(id);
+
     res.json(usuario);
 }
 
@@ -61,11 +70,30 @@ const eliminarUsuario = async (req: Request, res: Response) => {
     res.json(usuarioEliminado)
 }
 
+// Inicio de sesión al sistema
+const login = async (req:Request, res:Response) => {
+    const { user, pass } = req.params;
+    const query = {
+        usuario: user,
+        contrasena: pass,
+        estado: true 
+    };
+    const usuarioEncontrado:IUsuario|null = await Usuario.findOne(query)
+    if (usuarioEncontrado == null) {
+        return res.json({
+            errorStatus: 1,
+            message: 'Usuario no encontrado'
+        });
+    }
+    return res.json(usuarioEncontrado);
+}
+
 // Módulos a exportar
 export {
     obtenerUsuarios,
     obtenerUsuario,
     crearUsuario,
     actualizarUsuario,
-    eliminarUsuario
+    eliminarUsuario,
+    login
 }

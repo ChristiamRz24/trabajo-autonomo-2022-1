@@ -6,7 +6,8 @@ export interface IContratista {
     alquileres: [Schema.Types.ObjectId],
     nombre: String,
     dni: String,
-    direccion: String,
+    sexo: String,
+    correo: String,
     telefono: String,
     estado: Boolean,
 }
